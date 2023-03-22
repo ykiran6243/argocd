@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argomani-server-ingress
+  namespace: test
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: argomani.kiran-test-cluster.cec.lab.emc.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx
+            port:
+              name: https
+  tls:
+  - hosts:
+    - argomani.kiran-test-cluster.cec.lab.emc.com
+    secretName: argomani-secret
